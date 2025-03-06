@@ -17,20 +17,6 @@ public class Plataforms : MonoBehaviour
     [SerializeField]
     private float inactiveDuration =2f;
     [SerializeField]
-    private UnityEvent onDash;
-    [SerializeField]
-    private UnityEvent onStopDash;
-
-    private bool canDash = true;
-    private bool IsDashing;
-    public bool IsDashing{get => isDashing;}
-    private bool dashEnabled = true;
-
-    public void SetDashEnabled(bool enabled)
-    {
-        dashEnabled = enabled;
-    }
-    public void DashAction
 
     private void Start()
     {
