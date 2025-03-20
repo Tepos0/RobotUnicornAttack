@@ -3,25 +3,37 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-   [SerializeField]
-    private UnityEvent _onGameStart;
+    [SerializeField]
+    private UnityEvent onGameStart;
     [SerializeField]
     private UnityEvent onRespawnGame;
+    [SerializeField]
 
-    private float secondsToRestart = 3f;
+    private UnityEvent onFinishGame;
+    [SerializeField]
+    private float finalSecondsToRestart = 3f;
+
+    private float secondsToRestart = 5f;
 
     void Start()
     {
-        _onGameStart?.Invoke();
+        onGameStart?.Invoke();
     }
-
-    public void PlayerLose()
-    {
-        Invoke(nameof(RestartGame), secondsToRestart);
-    }
-
     private void RestartGame()
     {
         onRespawnGame?.Invoke();
     }
+
+    public void RespawnGame()
+    {
+        Invoke("RestartGame", secondsToRestart);
+    }
+
+    public void FinichGame()
+    {
+        onFinishGame?.Invoke();
+        Invoke("StartGame", finalSecondsToRestart);
+        Invoke("RestartGame", finalSecondsToRestart);
+    }
+
 }

@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,21 +6,19 @@ using UnityEngine.UI;
 public class Lives : MonoBehaviour
 {
     [SerializeField]
-    private  List<Image> _lives = new List<Image>();
-
+    private List<Image> _lives = new List<Image>();
     public void SetLives(int lives)
     {
-        for (int i = 0; 1<_lives.Count; i++)
+        for (int i = 0; i < _lives.Count; i++)
         {
-            if (i<lives)
+            if (i < lives)
             {
                 _lives[i].enabled = true;
             }
-            else 
+            else
             {
                 _lives[i].enabled = false;
             }
         }
     }
-
 }

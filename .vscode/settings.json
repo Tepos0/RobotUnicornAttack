@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "RobotUnicornAttack.sln"
+    "dotnet.defaultSolution": "RobotUnicornAttack-main.sln"
 }

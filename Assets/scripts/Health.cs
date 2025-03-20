@@ -1,15 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int _maxJealth = 3;
-
-    [SerializeField]
-    private UnityEvent _onHealthChanged;
-
+    private UnityEvent<int> _onHealthChanged;
     [SerializeField]
     private UnityEvent _onDeath;
     [SerializeField]
@@ -19,17 +14,16 @@ public class Health : MonoBehaviour
     public void SetHealth(int health)
     {
         _currentHealth = health;
-        _onHealthChanged.Invoke();  
+        _onHealthChanged?.Invoke(_currentHealth);
     }
 
-    public void OnReciveDamage()
+    public void OnReceiveDamage()
     {
-        SetHealth (_currentHealth -1);
+        SetHealth(_currentHealth - 1);
         if (_currentHealth <= 0)
         {
             _onDeath?.Invoke();
-        }
-        else 
+        } else
         {
             _onRespawn?.Invoke();
         }

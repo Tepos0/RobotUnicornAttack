@@ -1,16 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class ButtonController : MonoBehaviour, IPointerUpHandler , IPointerDownHandler
+public class ButtonController : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField]
     private UnityEvent onPressedButton;
-
     [SerializeField]
     private UnityEvent onReleasedButton;
-
     public void OnPointerDown(PointerEventData eventData)
     {
         onPressedButton?.Invoke();
@@ -20,5 +17,4 @@ public class ButtonController : MonoBehaviour, IPointerUpHandler , IPointerDownH
     {
         onReleasedButton?.Invoke();
     }
-
 }

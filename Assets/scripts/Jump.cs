@@ -2,28 +2,22 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-  [SerializeField]
-   private float _jumpForce = 10f;
-
-   [SerializeField]
-   private float _maxJumpTime = 0.3f;
-
-   [SerializeField]
-
-   private float _jumpBoost = 0.5f;
-
-
-   private int maxJumps = 2;
-
-   private int jumps;
-   private Rigidbody rb;
-   private bool _isGrounded;
-   private bool _isJumping;
-   private float _jumpTimeCounter;
-   private bool _buttonPressed;
-   private bool canJump = true;
-
-    void Start()
+    [SerializeField]
+    private float jumpForce = 5f;
+    [SerializeField]
+    private float maxJumpTime = 0.3f;
+    [SerializeField]
+    private float jumpBoost = 0.5f;
+    [SerializeField]
+    private int maxJumps = 2;
+    private int jumps;
+    private Rigidbody rb;
+    private bool isGrounded;
+    private bool isJumping;
+    private float jumpTimeCounter;
+    private bool buttonPressed;
+    private bool canJump = true;
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -31,6 +25,8 @@ public class Jump : MonoBehaviour
     public void SetCanJump(bool value)
     {
         canJump = value;
+        RestartJumps();
+        isGrounded = true;
     }
 
     private void RestartJumps()
@@ -44,53 +40,50 @@ public class Jump : MonoBehaviour
         {
             return;
         }
-        _buttonPressed=true;
-        if (_isGrounded || jumps > 0)
+        buttonPressed = true;
+        if (isGrounded || jumps > 0)
         {
-            _jumpBoost--;
-            _isJumping=true;
-            _jumpTimeCounter = _maxJumpTime;
-            rb.linearVelocity=Vector3.up*_jumpForce;
-            _isGrounded=false;
+            jumps--;
+            isJumping = true;
+            jumpTimeCounter = maxJumpTime;
+            rb.linearVelocity = Vector3.up * jumpForce;
+            isGrounded = false;
         }
     }
-        public void EndJump()
-        {
-            _buttonPressed=false;
-        }
 
-    private void FixedUpdate()
+    public void EndJump()
+    {
+        buttonPressed = false;
+        isJumping = false;
+    }
+
+    private void Update()
     {
         HandleJump();
     }
 
     private void HandleJump()
     {
-        if (_buttonPressed && _isJumping)
+        if (buttonPressed && isJumping)
         {
-            if(_jumpTimeCounter>0)
+            if (jumpTimeCounter > 0)
             {
-                rb.linearVelocity=Vector3.up*(_jumpForce+_jumpBoost);
-                _jumpTimeCounter-=Time.fixedDeltaTime;
+                rb.linearVelocity = Vector3.up * (jumpForce + jumpBoost);
+                jumpTimeCounter -= Time.deltaTime;
             }
-            else 
+            else
             {
-                _isJumping=false;
+                isJumping = false;
             }
         }
     }
 
-    private void OllisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-
-            _isGrounded=true;
+            RestartJumps();
+            isGrounded = true;
         }
-        
     }
-    
-
-
-
 }
