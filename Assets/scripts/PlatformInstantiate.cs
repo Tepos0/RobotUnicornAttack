@@ -6,32 +6,38 @@ public class PlatformInstantiate : MonoBehaviour
     [SerializeField]
     private List<GameObject> platforms;
     [SerializeField]
+    private List<GameObject> safePlatforms;
     private Transform platformsPosition;
     [SerializeField]
     private float distanceBetweenPlatforms = 2f;
     [SerializeField]
     private int initialPlatforms = 10;
     private float offsetPositionX = 0f;
+    private int platformIndex = 0;
 
     public void Start()
     {
+        platformIndex = 0;
         offsetPositionX = 0;
         InstantiatePlatforms(initialPlatforms);  
     }
 
     public void InstantiatePlatforms(int amount)
     {
+        
         for (int i = 0; i < amount; i++)
         {
-            int randomIndex = Random.Range(0, platforms.Count);
+            List<GameObject> platformsToUse = platformIndex < 2 ? safePlatforms : this.platforms;
+            int randomIndex = Random.Range(0, platformsToUse.Count);
             if (offsetPositionX != 0) 
             {
-                offsetPositionX += platforms[randomIndex].GetComponent<BoxCollider>().size.x * 0.5f;
+                offsetPositionX += platformsToUse[randomIndex].GetComponent<BoxCollider>().size.x * 0.5f;
             }
-                GameObject platform = Instantiate(platforms[randomIndex], Vector3.zero, Quaternion.identity);
+                GameObject platform = Instantiate(platformsToUse[randomIndex], Vector3.zero, Quaternion.identity);
             offsetPositionX += distanceBetweenPlatforms + platform.GetComponent<BoxCollider>().size.x * 0.5f;
             platform.transform.SetParent(transform);
             platform.transform.localPosition = new Vector3(offsetPositionX, 0,0);
+            platformIndex++;
         }
     }
 

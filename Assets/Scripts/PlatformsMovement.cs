@@ -22,6 +22,7 @@ public class PlatformsMovement : MonoBehaviour
     {
         pastSpeed = speed;
         speed *= speedMultiplier;
+
     }
     public void SpeedDown()
     {
@@ -52,6 +53,7 @@ public class PlatformsMovement : MonoBehaviour
     public void IncreaseSpeed()
     {
         speed += speedIncrease;
+        pastSpeed+= speedIncrease;
     }
 
     public void StopMovement()
