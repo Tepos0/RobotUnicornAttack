@@ -5,6 +5,9 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent onPlayerLose;
+    [SerializeField]
+
+    private UnityEvent<Transform> onObstacleDestroyed;
     private Dash dash;
 
     private void Start()
@@ -19,6 +22,7 @@ public class PlayerCollision : MonoBehaviour
             if (dash.IsDashing)
             {
                 Destroy(collision.gameObject);
+                onObstacleDestroyed?.Invoke(transform);
             }
             else
             {
