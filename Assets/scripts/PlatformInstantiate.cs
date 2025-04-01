@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlatformInstantiate : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> platforms;
+    private List<InstantiateObject> platformsPools;
     [SerializeField]
-    private List<GameObject> safePlatforms;
+    private List<InstantiateObject> safePlatformsPools;
     private Transform platformsPosition;
     [SerializeField]
     private float distanceBetweenPlatforms = 2f;
@@ -27,13 +27,13 @@ public class PlatformInstantiate : MonoBehaviour
         
         for (int i = 0; i < amount; i++)
         {
-            List<GameObject> platformsToUse = platformIndex < 2 ? safePlatforms : this.platforms;
+            List<InstantiateObject> platformsToUse = platformIndex < 2 ? safePlatformsPools : this.platformsPools;
             int randomIndex = Random.Range(0, platformsToUse.Count);
             if (offsetPositionX != 0) 
             {
-                offsetPositionX += platformsToUse[randomIndex].GetComponent<BoxCollider>().size.x * 0.5f;
+                offsetPositionX += platformsToUse[randomIndex].ObjectToInstantiate.GetComponent<BoxCollider>().size.x * 0.5f;
             }
-                GameObject platform = Instantiate(platformsToUse[randomIndex], Vector3.zero, Quaternion.identity);
+            GameObject platform = platformsToUse[randomIndex].CreateInstance();
             offsetPositionX += distanceBetweenPlatforms + platform.GetComponent<BoxCollider>().size.x * 0.5f;
             platform.transform.SetParent(transform);
             platform.transform.localPosition = new Vector3(offsetPositionX, 0,0);
