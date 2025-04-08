@@ -11,15 +11,16 @@ public class PlatformInstantiate : MonoBehaviour
     [SerializeField]
     private float distanceBetweenPlatforms = 2f;
     [SerializeField]
-    private int initialPlatforms = 10;
+    private int _InitialPlatforms = 10;
     private float offsetPositionX = 0f;
     private int platformIndex = 0;
+
 
     public void Start()
     {
         platformIndex = 0;
         offsetPositionX = 0;
-        InstantiatePlatforms(initialPlatforms);  
+        InstantiatePlatforms(_InitialPlatforms);  
     }
 
     public void InstantiatePlatforms(int amount)
@@ -45,7 +46,7 @@ public class PlatformInstantiate : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            child.gameObject.SetActive(false);
         }
         Start();
     }
