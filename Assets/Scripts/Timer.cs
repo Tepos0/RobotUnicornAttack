@@ -4,9 +4,10 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField]
+     [SerializeField]
     private Text timerText;
-
+    [SerializeField]
+    private UnityEvent onSecondPassed;
     private int currentSeconds;
     public void StartTimer(int startSeconds)
     {
@@ -17,9 +18,9 @@ public class Timer : MonoBehaviour
     private void SetTimer()
     {
         onSecondPassed?.Invoke();
-        currentSeconds --;
+        currentSeconds--;
         timerText.text = currentSeconds.ToString();
-        if(currentSeconds >0)
+        if (currentSeconds > 0)
         {
             Invoke("SetTimer", 1f);
         }

@@ -3,32 +3,29 @@ using UnityEngine;
 
 public class PlatformInstantiate : MonoBehaviour
 {
+     [SerializeField]
+    private List<InstantiateObject> platformPools;
     [SerializeField]
-    private List<InstantiateObject> platformsPools;
-    [SerializeField]
-    private List<InstantiateObject> safePlatformsPools;
-    private Transform platformsPosition;
+    private List<InstantiateObject> safePlatformPools;
     [SerializeField]
     private float distanceBetweenPlatforms = 2f;
     [SerializeField]
-    private int _InitialPlatforms = 10;
+    private int initialPlatforms = 10;
     private float offsetPositionX = 0f;
-    private int platformIndex = 0;
-
+    private int platformsIndex = 0;
 
     public void Start()
     {
-        platformIndex = 0;
+        platformsIndex = 0;
         offsetPositionX = 0;
-        InstantiatePlatforms(_InitialPlatforms);  
+        InstantiatePlatforms(initialPlatforms);  
     }
 
     public void InstantiatePlatforms(int amount)
     {
-        
         for (int i = 0; i < amount; i++)
         {
-            List<InstantiateObject> platformsToUse = platformIndex < 2 ? safePlatformsPools : this.platformsPools;
+            List<InstantiateObject> platformsToUse = platformsIndex < 2 ? safePlatformPools : platformPools;
             int randomIndex = Random.Range(0, platformsToUse.Count);
             if (offsetPositionX != 0) 
             {
@@ -38,7 +35,7 @@ public class PlatformInstantiate : MonoBehaviour
             offsetPositionX += distanceBetweenPlatforms + platform.GetComponent<BoxCollider>().size.x * 0.5f;
             platform.transform.SetParent(transform);
             platform.transform.localPosition = new Vector3(offsetPositionX, 0,0);
-            platformIndex++;
+            platformsIndex++;
         }
     }
 

@@ -3,32 +3,30 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
+      [SerializeField]
     private UnityEvent onGameStart;
     [SerializeField]
     private UnityEvent onRespawnGame;
     [SerializeField]
-
     private UnityEvent onFinishGame;
     [SerializeField]
-
     private UnityEvent onLoseGame;
     [SerializeField]
     private UnityEvent onShowGameOverScreen;
     [SerializeField]
-    private UnityEvent
-    private float finalSecondsToRestart = 5f;
-
+    private UnityEvent<int> onShowTimer;
+    [SerializeField]
     private float secondsToRestart = 3f;
-
+    [SerializeField]
+    private float finalSecondsToRestart = 5f;
+    [SerializeField]
     private float secondsToShowGameOverScreen = 3f;
 
     void Awake()
     {
-        secondsToRestart += secondsToShowGameOverScreen;
-        finalSecondsToRestart += secondsToShowGameOverScreen;
+        secondsToRestart+= secondsToShowGameOverScreen;
+        finalSecondsToRestart+= secondsToShowGameOverScreen;
     }
-
     void Start()
     {
         onGameStart?.Invoke();
@@ -37,16 +35,13 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         onLoseGame?.Invoke();
-        Invoke("ShowGameOverScreen", secondsToRestart);
+        Invoke("ShowGameOverScreen", secondsToShowGameOverScreen);
     }
 
     private void ShowGameOverScreen()
     {
         onShowGameOverScreen?.Invoke();
-    }
-    private void RestartGame()
-    {
-        onRespawnGame?.Invoke();
+        onShowTimer?.Invoke(3);
     }
 
     public void RespawnGame()
@@ -54,11 +49,15 @@ public class GameManager : MonoBehaviour
         Invoke("RestartGame", secondsToRestart);
     }
 
-    public void FinichGame()
+    public void FinishGame()
     {
         onFinishGame?.Invoke();
-        Invoke("StartGame", finalSecondsToRestart);
+        Invoke("Start", finalSecondsToRestart);
         Invoke("RestartGame", finalSecondsToRestart);
     }
 
+    private void RestartGame()
+    {
+        onRespawnGame?.Invoke();
+    }
 }

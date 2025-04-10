@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class Score : MonoBehaviour
 {
 
+    
     private List<int> scores = new List<int>();
     private int currentScore = 0;
     [SerializeField]
@@ -13,7 +14,13 @@ public class Score : MonoBehaviour
     private UnityEvent<int> onSetScore;
     [SerializeField]
     private UnityEvent<int> onSetFinalScore;
+    [SerializeField]
+    private UnityEvent<string> onSetHighScore;
 
+    private void Start()
+    {
+        SaveHighScore(0);   
+    }
     public void Initialize()
     {
         currentScore = 0;
@@ -22,6 +29,12 @@ public class Score : MonoBehaviour
     public void SetScore(int score)
     {
         currentScore = score;
+        onScoreChanged?.Invoke(currentScore);
+    }
+
+    public void AddScore(int score)
+    {
+        currentScore += score;
         onScoreChanged?.Invoke(currentScore);
     }
 
@@ -40,7 +53,23 @@ public class Score : MonoBehaviour
             finalScore += score;
         }
         onSetFinalScore?.Invoke(finalScore);
+        SaveHighScore(finalScore);
         scores.Clear();
+    }
+
+    private void SaveHighScore(int score)
+    {
+        int oldScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (score > oldScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+        }
+        else 
+        {
+            score = oldScore;
+        }
+        onSetHighScore?.Invoke(score.ToString());
     }
 
 
