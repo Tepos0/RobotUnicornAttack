@@ -1,0 +1,5 @@
+C:/Users/Equipo 22/Documents/Unity Projects/RobotUnicornAttack/.utmp/RelWithDebInfo/5w716v1i/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Equipo 22/Documents/Unity Projects/RobotUnicornAttack/.utmp/RelWithDebInfo/5w716v1i/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Equipo 22/Documents/Unity Projects/RobotUnicornAttack/.utmp/RelWithDebInfo/5w716v1i/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Equipo 22/Documents/Unity Projects/RobotUnicornAttack/.utmp/RelWithDebInfo/5w716v1i/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Equipo 22/Documents/Unity Projects/RobotUnicornAttack/.utmp/RelWithDebInfo/5w716v1i/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
