@@ -2127,6 +2127,7 @@ MonoBehaviour:
   - Game
   - jump
   - Laser
+  - Sonido (  Monedas  coins )
   audioS: {fileID: 1846651468}
   musicS: {fileID: 1536969451}
   masterMixer: {fileID: 0}
@@ -4827,6 +4828,18 @@ MonoBehaviour:
           m_IntArgument: 1000
           m_FloatArgument: 0
           m_StringArgument: +1000 coins
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 733641961}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1000
+          m_FloatArgument: 0
+          m_StringArgument: Sonido (  Monedas  coins )
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1762239428
