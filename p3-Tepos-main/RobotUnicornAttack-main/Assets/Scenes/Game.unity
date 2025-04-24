@@ -2127,7 +2127,7 @@ MonoBehaviour:
   - Game
   - jump
   - Laser
-  - Sonido (  Monedas  coins )
+  - Mario Coin Sound - Sound Effect (HD)
   audioS: {fileID: 1846651468}
   musicS: {fileID: 1536969451}
   masterMixer: {fileID: 0}
@@ -4540,7 +4540,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: jump
+          m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2124480448}
@@ -4839,7 +4839,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1000
           m_FloatArgument: 0
-          m_StringArgument: Sonido (  Monedas  coins )
+          m_StringArgument: Mario Coin Sound - Sound Effect (HD)
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1762239428
